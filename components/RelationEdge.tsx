@@ -48,10 +48,11 @@ const RelationEdge = ({
 
   const { relationType } = data!;
   const [markerStart, markerEnd] = {
-    "m-n": ["url(#prismaliser-many)", "url(#prismaliser-many)"],
-    "1-n": ["url(#prismaliser-many)", "url(#prismaliser-one)"],
-    "1-1": ["url(#prismaliser-one)", "url(#prismaliser-one)"],
+    "many_to_many": ["url(#prismaliser-many)", "url(#prismaliser-many)"],
+    "many_to_one": ["url(#prismaliser-many)", "url(#prismaliser-one)"],
+    "one_to_one": ["url(#prismaliser-one)", "url(#prismaliser-one)"],
   }[relationType];
+
 
   // TODO: markers look weird when the edge needs to rotate perpendicular to the
   // start or end. Maybe need to edit `getSmoothStepPath` so it adds some sort

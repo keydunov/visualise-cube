@@ -927,7 +927,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/json-schema@npm:^7.0.9":
+"@types/js-yaml@npm:^4":
+  version: 4.0.5
+  resolution: "@types/js-yaml@npm:4.0.5"
+  checksum: 7dcac8c50fec31643cc9d6444b5503239a861414cdfaa7ae9a38bc22597c4d850c4b8cec3d82d73b3fbca408348ce223b0408d598b32e094470dfffc6d486b4d
+  languageName: node
+  linkType: hard
+
+"@types/json-schema@npm:^7.0.0, @types/json-schema@npm:^7.0.9":
   version: 7.0.11
   resolution: "@types/json-schema@npm:7.0.11"
   checksum: 527bddfe62db9012fccd7627794bd4c71beb77601861055d87e3ee464f2217c85fca7a4b56ae677478367bbd248dbde13553312b7d4dbc702a2f2bbf60c4018d
@@ -3974,6 +3981,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jsonc-parser@npm:^3.0.0":
+  version: 3.2.0
+  resolution: "jsonc-parser@npm:3.2.0"
+  checksum: 946dd9a5f326b745aa326d48a7257e3f4a4b62c5e98ec8e49fa2bdd8d96cef7e6febf1399f5c7016114fd1f68a1c62c6138826d5d90bc650448e3cf0951c53c7
+  languageName: node
+  linkType: hard
+
 "jsonfile@npm:^6.0.1":
   version: 6.1.0
   resolution: "jsonfile@npm:6.1.0"
@@ -4379,6 +4393,44 @@ __metadata:
   version: 0.34.1
   resolution: "monaco-editor@npm:0.34.1"
   checksum: 4c6b35d7c566ec414b758cdd45dfb08d6fe46e2e8fdeed88b619a52c47592ce6df476d9490a58e5d450339c4a93f09d500adc9c017a348179277b98aa6009fa4
+  languageName: node
+  linkType: hard
+
+"monaco-marker-data-provider@npm:^1.0.0":
+  version: 1.1.1
+  resolution: "monaco-marker-data-provider@npm:1.1.1"
+  peerDependencies:
+    monaco-editor: ">=0.30.0"
+  checksum: d24c3dbb5c859958dd23f86798ad22d5529b06390ef3f2fe0392e54438767df19c239402a1f98c9a1a9b30dc5c4aad4597c4583292465e70c0ecc95581914397
+  languageName: node
+  linkType: hard
+
+"monaco-worker-manager@npm:^2.0.0":
+  version: 2.0.1
+  resolution: "monaco-worker-manager@npm:2.0.1"
+  peerDependencies:
+    monaco-editor: ">=0.30.0"
+  checksum: 269342261a182ba03eca7d450f0944a751e96bf1b3370c7c3f904d0448fcdbb05696d8cff2a0fa571280eca0f91bc84f5ec0a3a858949ddbe7e09b9cc7021b41
+  languageName: node
+  linkType: hard
+
+"monaco-yaml@npm:^4.0.4":
+  version: 4.0.4
+  resolution: "monaco-yaml@npm:4.0.4"
+  dependencies:
+    "@types/json-schema": ^7.0.0
+    jsonc-parser: ^3.0.0
+    monaco-marker-data-provider: ^1.0.0
+    monaco-worker-manager: ^2.0.0
+    path-browserify: ^1.0.0
+    prettier: ^2.0.0
+    vscode-languageserver-textdocument: ^1.0.0
+    vscode-languageserver-types: ^3.0.0
+    vscode-uri: ^3.0.0
+    yaml: ^2.0.0
+  peerDependencies:
+    monaco-editor: ">=0.30"
+  checksum: c9961a506d248a56bf327f62565a551c04320992f1894ccd2f9da2db138096b073c26db0fc1deddf020139ec819931023e5545fcd0d8b05f23b9400e6c0e34e7
   languageName: node
   linkType: hard
 
@@ -4953,6 +5005,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"path-browserify@npm:^1.0.0":
+  version: 1.0.1
+  resolution: "path-browserify@npm:1.0.1"
+  checksum: c6d7fa376423fe35b95b2d67990060c3ee304fc815ff0a2dc1c6c3cfaff2bd0d572ee67e18f19d0ea3bbe32e8add2a05021132ac40509416459fffee35200699
+  languageName: node
+  linkType: hard
+
 "path-exists@npm:^3.0.0":
   version: 3.0.0
   resolution: "path-exists@npm:3.0.0"
@@ -5133,6 +5192,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"prettier@npm:^2.0.0":
+  version: 2.8.7
+  resolution: "prettier@npm:2.8.7"
+  bin:
+    prettier: bin-prettier.js
+  checksum: fdc8f2616f099f5f0d685907f4449a70595a0fc1d081a88919604375989e0d5e9168d6121d8cc6861f21990b31665828e00472544d785d5940ea08a17660c3a6
+  languageName: node
+  linkType: hard
+
 "prettier@npm:^2.8.3":
   version: 2.8.3
   resolution: "prettier@npm:2.8.3"
@@ -5152,6 +5220,7 @@ __metadata:
     "@monaco-editor/react": ^4.4.6
     "@prisma/generator-helper": ~4.9.0
     "@prisma/internals": ^4.9.0
+    "@types/js-yaml": ^4
     "@types/node": ^16.18.11
     "@types/react": ^17.0.53
     autoprefixer: ^10.4.13
@@ -5161,7 +5230,9 @@ __metadata:
     eslint-config-clarity: 1.0.0
     eslint-import-resolver-typescript: ^3.5.3
     html2canvas: ^1.4.1
+    js-yaml: ^4.1.0
     monaco-editor: ^0.34.1
+    monaco-yaml: ^4.0.4
     next: ^12.3.4
     postcss: ^8.4.21
     prettier: ^2.8.3
@@ -6640,6 +6711,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"vscode-languageserver-textdocument@npm:^1.0.0":
+  version: 1.0.9
+  resolution: "vscode-languageserver-textdocument@npm:1.0.9"
+  checksum: 36b76f725098d3e0d97885c05c51fca47388d9b62e936f6c8824c44a4fac7a96e1406538538a0f46ef1fdb9f1053ddc1cacb5e7b168cecb36d3c018942ec6f52
+  languageName: node
+  linkType: hard
+
+"vscode-languageserver-types@npm:^3.0.0":
+  version: 3.17.3
+  resolution: "vscode-languageserver-types@npm:3.17.3"
+  checksum: fbc8221297261f659a6482875ff2a419dc9d55965dc53745797da569ff9f819cd832e6f2699017baadd946548bbfe212e3f6971f3d960f12dc0ee9c629dacc07
+  languageName: node
+  linkType: hard
+
+"vscode-uri@npm:^3.0.0":
+  version: 3.0.7
+  resolution: "vscode-uri@npm:3.0.7"
+  checksum: c899a0334f9f6ba53021328e083f6307978c09b94407d7e5fe86fcd8fcb8f1da0cb344123a335e55769055007a46d51aff83f9ee1dfc0296ee54b78f34ef0e4f
+  languageName: node
+  linkType: hard
+
 "vue-eslint-parser@npm:^9.0.1":
   version: 9.0.3
   resolution: "vue-eslint-parser@npm:9.0.3"
@@ -6798,6 +6890,13 @@ __metadata:
   version: 1.10.2
   resolution: "yaml@npm:1.10.2"
   checksum: ce4ada136e8a78a0b08dc10b4b900936912d15de59905b2bf415b4d33c63df1d555d23acb2a41b23cf9fb5da41c256441afca3d6509de7247daa062fd2c5ea5f
+  languageName: node
+  linkType: hard
+
+"yaml@npm:^2.0.0":
+  version: 2.2.1
+  resolution: "yaml@npm:2.2.1"
+  checksum: 84f68cbe462d5da4e7ded4a8bded949ffa912bc264472e5a684c3d45b22d8f73a3019963a32164023bdf3d83cfb6f5b58ff7b2b10ef5b717c630f40bd6369a23
   languageName: node
   linkType: hard
 

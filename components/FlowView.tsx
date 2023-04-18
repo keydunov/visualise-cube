@@ -23,7 +23,7 @@ import { DMMFToElementsResult } from "~/util/types";
 import type { DMMF } from "@prisma/generator-helper";
 
 const nodeTypes = {
-  model: ModelNode,
+  cube: ModelNode,
   enum: EnumNode,
 };
 
@@ -41,10 +41,10 @@ const FlowView = ({ dmmf }: FlowViewProps) => {
 
   useEffect(() => {
     const { nodes, edges } = dmmf
-      ? dmmfToElements(dmmf, layout)
+      ? dmmf
       : ({ nodes: [], edges: [] } as DMMFToElementsResult);
-
-    // See if `applyNodeChanges` can work here?
+    
+      // See if `applyNodeChanges` can work here?
     setNodes(nodes);
     setEdges(edges);
   }, [dmmf, layout]);

@@ -14,44 +14,53 @@ import type { DMMF } from "@prisma/generator-helper";
 import type { editor } from "monaco-editor";
 
 const initial = `
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
+cubes:
+  - name: base_orders
+    sql_table: public.orders
+    public: false
 
-generator client {
-  provider = "prisma-client-js"
-}
+    joins:
+      - name: users
+        sql: "{CUBE}.user_id = {users}.id"
+        relationship: many_to_one
 
-model User {
-  id Int @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  email String @unique
-  name String?
-  role Role @default(USER)
-  posts Post[]
-}
+    measures:
+      - name: count
+        type: count
 
-model Post {
-  id Int @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  published Boolean @default(false)
-  title String @db.VarChar(255)
-  author User? @relation(fields: [authorId], references: [id])
-  authorId Int?
-}
+    dimensions:
+      - name: id
+        sql: id
+        type: number
+        primary_key: true
 
-enum Role {
-  USER
-  ADMIN
-}
+      - name: status
+        sql: status
+        type: string
+
+  - name: users
+    sql_table: public.users
+    public: false
+
+    measures:
+      - name: count
+        type: count
+
+    dimensions:
+      - name: id
+        sql: id
+        type: number
+        primary_key: true
+
+      - name: city
+        sql: city
+        type: string
 `.trim();
 
 const IndexPage = () => {
   // TODO: multiple save states.
   const [storedText, setStoredText] = useLocalStorage(
-    "prismaliser.text",
+    "cubedatamodel.text",
     initial
   );
   const [text, setText] = useState(storedText!);
@@ -62,6 +71,7 @@ const IndexPage = () => {
 
   const submit = async () => {
     setStoredText(text);
+    // TODO: get meta
     const resp = await post({ schema: text });
 
     if (response.ok) {

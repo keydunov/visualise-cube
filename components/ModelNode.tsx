@@ -6,52 +6,33 @@ import styles from "./Node.module.scss";
 
 import { ModelNodeData } from "~/util/types";
 
-type ColumnData = ModelNodeData["columns"][number];
-
-const isTarget = ({
-  kind,
-  isList,
-  relationFromFields,
-  relationName,
-  relationType,
-}: ColumnData) =>
-  kind === "enum" ||
-  ((relationType === "1-n" || relationType === "m-n") && !isList) ||
-  (relationType === "1-1" && !relationFromFields?.length) ||
-  // Fallback for implicit m-n tables (maybe they should act like the child in a
-  // 1-n instead)
-  (kind === "scalar" && !!relationName);
-
-const isSource = ({ isList, relationFromFields, relationType }: ColumnData) =>
-  ((relationType === "1-n" || relationType === "m-n") && isList) ||
-  (relationType === "1-1" && !!relationFromFields?.length);
-
 const ModelNode = ({ data }: ModelNodeProps) => {
-  const store = useStoreApi();
-  const { setCenter, getZoom } = useReactFlow();
 
-  const focusNode = (nodeId: string) => {
-    const { nodeInternals } = store.getState();
-    const nodes = Array.from(nodeInternals).map(([, node]) => node);
+  const members = [...data.dimensions, ...data.measures];
 
-    if (nodes.length > 0) {
-      const node = nodes.find((iterNode) => iterNode.id === nodeId);
-
-      if (!node) return;
-
-      const x = node.position.x + node.width! / 2;
-      const y = node.position.y + node.height! / 2;
-      const zoom = getZoom();
-
-      setCenter(x, y, { zoom, duration: 1000 });
-    }
-  };
+  const isDimension = (name) => data.dimensions.map((dim) => dim.name).includes(name)
 
   return (
     <table
       className="font-sans bg-white border-2 border-separate border-black rounded-lg"
       style={{ minWidth: 200, maxWidth: 500, borderSpacing: 0 }}
     >
+      <Handle
+        key={`${data.name}-target`}
+        className={cc([styles.handle, styles.left])}
+        type="target"
+        id={`${data.name}-target`}
+        position={Position.Left}
+        isConnectable={false}
+      />
+      <Handle
+        key={`${data.name}-source`}
+        className={cc([styles.handle, styles.right])}
+        type="source"
+        id={`${data.name}-source`}
+        position={Position.Right}
+        isConnectable={false}
+      />
       <thead title={data.documentation}>
         <tr>
           <th
@@ -68,10 +49,11 @@ const ModelNode = ({ data }: ModelNodeProps) => {
         </tr>
       </thead>
       <tbody>
-        {data.columns.map((col) => (
-          <tr key={col.name} className={styles.row} title={col.documentation}>
-            <td className="font-mono font-semibold border-t-2 border-r-2 border-gray-300">
-              <button
+        {members.map((col) => (
+          <tr key={col.name} className={styles.row} style={{ backgroundColor: `${isDimension(col.name) ? 'rgba(102, 93, 232, 0.7)' : 'rgba(218, 52, 102, 0.7)'}`}} title={col.documentation}>
+            <td className="p-2 font-mono font-semibold border-t-2 border-r-2 border-gray-300">
+              {col.name}
+              {/* <button
                 type="button"
                 className={cc([
                   "relative",
@@ -84,36 +66,10 @@ const ModelNode = ({ data }: ModelNodeProps) => {
                   focusNode(col.type);
                 }}
               >
-                {col.name}
-                {isTarget(col) && (
-                  <Handle
-                    key={`${data.name}-${col.relationName || col.name}`}
-                    className={cc([styles.handle, styles.left])}
-                    type="target"
-                    id={`${data.name}-${col.relationName || col.name}`}
-                    position={Position.Left}
-                    isConnectable={false}
-                  />
-                )}
-              </button>
+              </button> */}
             </td>
-            <td className="p-2 font-mono border-t-2 border-r-2 border-gray-300">
-              {col.displayType}
-            </td>
-            <td className="font-mono border-t-2 border-gray-300">
-              <div className="relative p-2">
-                {col.defaultValue || ""}
-                {isSource(col) && (
-                  <Handle
-                    key={`${data.name}-${col.relationName}-${col.name}`}
-                    className={cc([styles.handle, styles.right])}
-                    type="source"
-                    id={`${data.name}-${col.relationName}-${col.name}`}
-                    position={Position.Right}
-                    isConnectable={false}
-                  />
-                )}
-              </div>
+            <td className={`p-2 font-mono border-t-2 border-r-2 border-gray-300`}>
+              {col.type}
             </td>
           </tr>
         ))}

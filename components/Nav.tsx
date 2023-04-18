@@ -10,19 +10,19 @@ const Nav = () => (
     className="flex items-center w-full py-4 pl-5 pr-4 text-white bg-gray-600"
     style={{ gridArea: "nav" }}
   >
-    <Image src="/img/logo.svg" alt="Prismaliser" width={200} height={20} />
+    {/* <Image src="/img/logo.svg" alt="Prismaliser" width={200} height={20} /> */}
 
     <div className="flex-1" />
 
     <div className="flex items-center gap-4">
-      <a
+      {/* <a
         className="button icon light"
         href="https://prisma.io"
         title="Prisma"
         aria-label="Prisma"
       >
         <Icon icon={prisma} height={24} />
-      </a>
+      </a> */}
 
       <a
         className="button icon light"
