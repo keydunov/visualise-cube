@@ -9,7 +9,7 @@ const App = ({ Component, pageProps }: AppProps) => (
   <>
     <Head>
       <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-      <title>Prismaliser</title>
+      <title>Visualize Cube</title>
       <meta name="description" content="Visualise your Prisma schema!" />
       <meta
         name="keywords"
